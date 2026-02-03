@@ -1,0 +1,21 @@
+[Unit]
+Description=PostgreSQL 16 Docker Container
+After=docker.service
+
+[Service]
+ExecStart=/usr/bin/docker run --rm \
+  --name %n \
+  -p 5432:5432 \
+  -p 0.0.0.0:5432:5432 \
+  -e POSTGRES_PASSWORD=yourpassword \
+  -v /var/lib/postgresql/16/data:/var/lib/postgresql/data \
+  postgres:16.9
+
+ExecStop=/usr/bin/docker stop %n
+
+Restart=on-failure
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target
+
