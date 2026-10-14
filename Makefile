@@ -1,4 +1,14 @@
 
+postgres\:17:
+	/usr/bin/docker run --rm \
+	  --name postgres-17 \
+	  -p 0.0.0.0:5432:5432 \
+	  -e POSTGRES_PASSWORD=astrongpassword \
+	  -v $(PWD)/var/lib/postgresql/17/data:/var/lib/postgresql/data \
+	  postgres:17.11
+
+.PHONY: postgres\:17
+
 postgres\:16:
 	/usr/bin/docker run --rm \
 	  --name postgres-16 \
